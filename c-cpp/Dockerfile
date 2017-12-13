@@ -6,6 +6,7 @@ RUN apt-get update -y \
  && apt-get install -qq -y python python-dev python-pip \
  && apt-get install -qq -y python3 python3-dev python3-pip \
  && apt-get install -qq -y vim \
+ && apt-get install -qq -y libreadline-dev \
  && apt-get autoremove -y \
  && apt-get autoclean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
