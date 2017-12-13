@@ -4,19 +4,11 @@ FROM nimusis/ubuntu-ko:16.04
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     PATH=${PATH}:/usr/lib/jvm/default-jvm/bin/
 
-RUN add-apt-repository ppa:openjdk-r/ppa -y && \
+RUN apt-get update -y \
+ && apt-get install -qq -y python-software-properties software-properties-common
 
-    # update data from repositories
-    apt-get update && \
-
-    # upgrade OS
-    apt-get -y dist-upgrade && \
-
-    # install application
-    apt-get install -y --no-install-recommends openjdk-8-jdk && \
-
-    # fix default setting
-    ln -s java-8-openjdk-amd64  /usr/lib/jvm/default-jvm && \
-
-    # remove apt cache from image
-    apt-get clean all
+RUN add-apt-repository ppa:openjdk-r/ppa -y \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends openjdk-8-jdk \
+ && ln -s java-8-openjdk-amd64  /usr/lib/jvm/default-jvm \
+ && apt-get clean all
